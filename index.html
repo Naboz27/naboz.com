@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>naboz.com</title>
+<meta charset="UTF-8">
+<style>
+body {
+    background-image: url('foto1.jpg');
+    background-size: cover;
+    color: #ffffff;
+    font-family: Arial, Verdana, sans-serif;
+}
+table, td { background-color: transparent; color: #ffffff; }
+a { color: #ffcc00; text-decoration: none; }
+a:visited { color: #ff00ff; }
+a:active { color: #00ffff; }
+
+#chatBots {
+    width:90%; max-width:900px; height:450px;
+    background:rgba(0,0,0,0.5); color:#ffffff;
+    padding:15px; overflow-y:auto;
+    font-family:Arial, Verdana, sans-serif; margin-bottom:10px;
+    border:2px solid #ffcc00;
+}
+input, button { font-family: Arial, Verdana, sans-serif; padding:5px; }
+</style>
+
+<script>
+// Subir fotos
+function mostrarFoto(input) {
+    var galeria = document.getElementById("galeriaFotos");
+    if(input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = document.createElement("img");
+            img.src = e.target.result;
+            img.width = 300;
+            img.height = 200;
+            img.border = 2;
+            galeria.appendChild(img);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// Chat de bots (solo texto)
+const chatDiv = { get div() { return document.getElementById('chatBots'); } };
+
+// Nombres y apodos de bots
+const nombres = [
+  'xXLolzGuNZXx123','Maria','Pedro','Gamer_9000','XxShadowNinjaXx',
+  'Lucía','Antonio','xXProKillerXx','Sofi','Jorge','xXCrazyCatXx','Laura',
+  'Mike','xXPizzaKingXx','Anna','xXDragonSlayerXx','Carlos','Emma','xXChaosLordXx',
+  'Кирилл','李华','さくら','René','Óscar','Nicolás','Fatima','Zoë','Miyu','Sven','Amélie',
+  'xXUwULordXx','xXOwOQueenXx','xXSh1tpost3rXx','xXMemesterXx'
+];
+
+// Idiomas y frases
+const mensajesIdiomas = {
+    es:["Hola! Qué tal?","Me gusta esta página!","Jajaja xD","Alguna curiosidad?","Qué planes tienes?"],
+    en:["Hello!","I love this site!","Haha XD","Any fun facts?","What's up?"],
+    ru:["Привет!","Мне нравится сайт","Ха-ха","Любопытно!","Как дела?"],
+    zh:["你好!","我喜欢这个网站","哈哈","有趣的事实?","你好吗?"],
+    ja:["こんにちは!","このサイト好きです","笑","面白いこと?","元気ですか?"],
+    ar:["مرحبا!","أحب هذا الموقع","Haha","معلومة ممتعة؟","كيف الحال؟"]
+};
+
+// Generar frase aleatoria (solo texto)
+function generarFraseRandom(){
+    const idiomaKeys = Object.keys(mensajesIdiomas);
+    const idioma = idiomaKeys[Math.floor(Math.random()*idiomaKeys.length)];
+    return mensajesIdiomas[idioma][Math.floor(Math.random()*mensajesIdiomas[idioma].length)];
+}
+
+// Enviar mensajes
+function enviarBots(userText){
+    if(userText){
+        chatDiv.div.innerHTML += `<div style="color:#ffcc00;"><b>Tú:</b> ${userText}</div>`;
+    }
+    const botName = nombres[Math.floor(Math.random()*nombres.length)];
+    const frase = generarFraseRandom();
+
+    setTimeout(()=>{
+        chatDiv.div.innerHTML += `<div><b>${botName}:</b> ${frase}</div>`;
+        chatDiv.div.scrollTop = chatDiv.div.scrollHeight;
+    }, 400 + Math.random()*500);
+}
+
+// Input usuario
+function enviarUsuario(){
+    const entradaInput = document.getElementById('entradaBots');
+    const texto = entradaInput.value.trim();
+    if(texto){
+        enviarBots(texto);
+        entradaInput.value='';
+    }
+}
+
+// Mensajes automáticos frecuentes
+setInterval(()=>{ enviarBots(''); }, 2000);
+</script>
+</head>
+<body text="#ffffff" link="#ffcc00" vlink="#ff00ff" alink="#00ffff">
+
+<center>
+<h1 style="color:#ff00ff;">naboz.com</h1>
+
+<!-- Música de fondo -->
+<!--[if IE]><bgsound src="musica.wav" loop="infinite"><![endif]-->
+<audio id="audioPlayer" controls autoplay loop>
+  <source src="musica.wav" type="audio/wav">
+</audio>
+<script>
+var audio = document.getElementById('audioPlayer');
+if(audio){
+    audio.addEventListener('ended', function(){ audio.currentTime = 0; audio.play(); });
+}
+</script>
+
+<!-- Menú -->
+<table width="900" border="0" cellpadding="5" cellspacing="0">
+<tr>
+<td colspan="9" align="center"><font size="+6" color="#ff00ff"><b>naboz.com</b></font></td>
+</tr>
+<tr>
+<td align="center"><a href="#descargas"><b>Descargas</b></a></td>
+<td align="center"><a href="#noticias"><b>Noticias</b></a></td>
+<td align="center"><a href="#chistes"><b>Chistes</b></a></td>
+<td align="center"><a href="#musica"><b>Música</b></a></td>
+<td align="center"><a href="#imagenes"><b>Imágenes</b></a></td>
+<td align="center"><a href="#chat"><b>Chat</b></a></td>
+<td align="center"><a href="#redes"><b>Redes</b></a></td>
+<td align="center"><a href="#subefotos"><b>Subir Fotos</b></a></td>
+<td align="center"><a href="#visitas"><b>Visitas</b></a></td>
+</tr>
+</table>
+
+<!-- Secciones -->
+<table width="900" border="0" cellpadding="5" cellspacing="0">
+
+<tr><td id="descargas">
+<h2>Descargas</h2>
+<p>Sección con descargas retro, seguras y divertidas.</p>
+<a href="#noticias">Ir a Noticias</a>
+</td></tr>
+
+<tr><td id="noticias">
+<h2>Noticias</h2>
+<p>Últimas noticias coloridas y vibrantes.</p>
+<a href="#chistes">Ir a Chistes y Curiosidades</a>
+</td></tr>
+
+<tr><td id="chistes">
+<h2>Chistes y Curiosidades</h2>
+<ul>
+<li>¿Qué hace una abeja en el gimnasio? ¡Zum-ba!</li>
+<li>¿Cómo se despiden los químicos? Ácido un placer.</li>
+<li>¿Qué le dice un gusano a otro? Voy a dar una vuelta a la manzana.</li>
+</ul>
+<a href="#musica">Ir a Música</a>
+</td></tr>
+
+<tr><td id="musica">
+<h2>Música</h2>
+<p>emails - Digital Girl (loop) para ambientar la página.</p>
+<a href="#imagenes">Ir a Imágenes</a>
+</td></tr>
+
+<tr><td id="imagenes">
+<h2>Imágenes y GIFs</h2>
+<div id="galeriaFotos">
+<img src="foto1.jpg" width="300" height="200" alt="Imagen 1" border="2">
+<img src="foto2.png" width="300" height="200" alt="Imagen 2" border="2">
+<img src="gif1.gif" width="300" height="200" alt="GIF 1" border="2">
+</div>
+<br><a href="#chat">Ir a Chat</a>
+</td></tr>
+
+<tr><td id="chat">
+<h2>Chat Activo</h2>
+<p>Interactúa con bots en español, ruso, árabe, chino y japonés 😹</p>
+<div id="chatBots"></div>
+<input type="text" id="entradaBots" placeholder="Escribe aquí..." style="width:70%;">
+<button onclick="enviarUsuario()">Enviar</button>
+<br><a href="#redes">Ir a Redes Sociales</a>
+</td></tr>
+
+<tr><td id="redes">
+<h2>Redes Sociales</h2>
+<ul>
+<li><a href="https://discord.gg/dT6YZjGYVc" target="_blank">Discord</a></li>
+<li><a href="https://www.youtube.com/@naboz2688" target="_blank">YouTube</a></li>
+</ul>
+<a href="#subefotos">Ir a Subir Fotos</a>
+</td></tr>
+
+<tr><td id="subefotos">
+<h2>Subir Fotos</h2>
+<p>Selecciona una foto para que aparezca en la galería:</p>
+<form>
+Nombre:<br>
+<input type="text" name="Nombre" size="40"><br><br>
+Foto:<br>
+<input type="file" name="Foto" onchange="mostrarFoto(this);"><br><br>
+<input type="reset" value="Borrar">
+</form>
+<a href="#imagenes">Volver a Imágenes</a>
+</td></tr>
+
+<tr><td id="visitas">
+<h2>Contador de Visitas</h2>
+<img src="https://hitwebcounter.com/counter/counter.php?page=1234567&style=0006&nbdigits=5&type=page&initCount=0" alt="Contador de visitas">
+<br><a href="#descargas">Volver al inicio</a>
+</td></tr>
+
+</table>
+
+<!-- Pie de página -->
+<table width="900" border="0" cellpadding="5" cellspacing="0">
+<tr><td align="center" style="color:#00ffff;"><b>&copy; 2025 naboz.com</b></td></tr>
+</table>
+
+</center>
+</body>
+</html>
